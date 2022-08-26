@@ -7,6 +7,10 @@ const MovieListing = (props) => {
   let [movies,setMovies] = useState([])
   let navigation = useNavigation();
   const inputValue = props.route.params.inputValue;
+  const totalResults = props.route.params.totalResults;
+  const totalPages = Math.round((totalResults/10)+1);
+  console.log(totalResults/10)
+  console.log(totalPages)
   const fetchAPI = () => (
     fetch(`http://www.omdbapi.com/?s='${inputValue}'&page=${pageno}&apikey=4512232e`)
     .then((data) => data.json())
@@ -15,6 +19,7 @@ const MovieListing = (props) => {
     })
   )
   const moreMovies =() => {
+
     setPageno(pageno+1)
   }
 
@@ -45,7 +50,7 @@ const MovieListing = (props) => {
           );
         }}
       />
-      <Button onPress={moreMovies} title="More Movies" style={styles.button}/>
+      {totalPages !== pageno?<Button onPress={moreMovies} title="More Movies" style={styles.button}  color= "green"/>:null}
     </View>
   );
 };

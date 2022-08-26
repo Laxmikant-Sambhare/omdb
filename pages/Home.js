@@ -17,8 +17,9 @@ const Home = ({ navigation }) => {
         .then((data2) => {
           setResponse(data2.Response)
           setInputValue("");
+          let totalResults = data2.totalResults
           if(data2.Response === "True"){
-          navigation.navigate("MovieListing",{data2,inputValue})
+          navigation.navigate("MovieListing",{inputValue,totalResults})
           }
         });
     }
