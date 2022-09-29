@@ -5,11 +5,15 @@ import {
   Button,
   Text,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { getMovies } from "../App/Feature/movieslice";
+import { useDispatch, useSelector } from 'react-redux';
 
 const Home = ({ navigation }) => {
   let [response, setResponse] = useState("")
   let [inputValue, setInputValue] = useState("");
+  const dispatch = useDispatch();
+  const {movies, loading} = useSelector((state) => state.movie);
   const Search = () => {
     if (inputValue !== "") {
       fetch(`http://www.omdbapi.com/?s='${inputValue}'&apikey=4512232e`)
@@ -23,10 +27,12 @@ const Home = ({ navigation }) => {
           }
         });
     }
+    dispatch(getMovies(inputValue,1))
   };
   const SearchInput = (e) => {
     setInputValue(e.target.value);
   };
+  
 
   return (
     <View style={styles.maincontainer}>

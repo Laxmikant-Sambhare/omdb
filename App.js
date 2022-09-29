@@ -4,9 +4,13 @@ import Home from "./pages/Home";
 import MovieDetails from "./pages/MovieDetails";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MovieListing from "./pages/MovieListing";
+import { Provider } from "react-redux";
+import { store } from "./App/Store";
+store
 const Stack = createNativeStackNavigator();
 const App = () => {
   return (
+    <Provider store={store}>
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Home" component={Home} />
@@ -14,6 +18,7 @@ const App = () => {
         <Stack.Screen name="MovieDetails" component={MovieDetails} />
       </Stack.Navigator>
     </NavigationContainer>
+    </Provider>
   );
 };
 
